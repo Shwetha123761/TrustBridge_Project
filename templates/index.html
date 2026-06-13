@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustBridge | AI Offer Letter Verifier</title>
+    <link rel="stylesheet" href="{{ url_with_timestamp('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container navbar">
+            <div class="logo"><i class="fa-solid fa-shield-halved-sign"></i> Trust<span>Bridge</span></div>
+            <button id="theme-toggle" class="btn btn-secondary"><i class="fa-solid fa-moon"></i> Dark Mode</button>
+        </div>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <h1>Verify the Authenticity of Your Job Offer</h1>
+            <p>Protect yourself from employment scams. Upload your offer letter for an instant compliance check.</p>
+        </section>
+        <section class="upload-container">
+            <form id="upload-form">
+                <div class="drop-zone" id="drop-zone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p>Drag & drop your offer letter here or <span class="browse-text">browse files</span></p>
+                    <span class="file-info">Supports PDF, PNG, JPG (Max 5MB)</span>
+                    <input type="file" id="file-input" name="file" accept=".pdf,.png,.jpg,.jpeg" style="display: none;">
+                </div>
+                <div id="file-selected-name" class="file-selected-name"></div>
+                <button type="submit" class="btn btn-primary btn-block" id="submit-btn" disabled>Verify Offer Letter</button>
+            </form>
+        </section>
+        <div class="loader-container" id="loader">
+            <div class="spinner"></div>
+            <p>Analyzing document security layout syntax...</p>
+        </div>
+        <section id="results-dashboard" class="results-dashboard" style="display: none;">
+            <div class="dashboard-header">
+                <h2>Analysis Dashboard</h2>
+                <button onclick="window.print()" class="btn btn-secondary btn-sm">Download Report</button>
+            </div>
+            <div class="grid-layout">
+                <div class="card score-card">
+                    <h3>Trust Score</h3>
+                    <div class="score-display"><span id="score-num">0</span><span class="score-max">/100</span></div>
+                    <div class="risk-badge" id="risk-badge">Checking...</div>
+                </div>
+                <div class="card ai-card">
+                    <h3><i class="fa-solid fa-brain"></i> Analysis Summary</h3>
+                    <div id="ai-summary" class="ai-text">Analyzing...</div>
+                </div>
+            </div>
+            <div class="card entities-card">
+                <h3><i class="fa-solid fa-address-card"></i> Extracted Metadata</h3>
+                <div class="entities-grid" id="entities-grid"></div>
+            </div>
+            <div class="card rules-card">
+                <h3><i class="fa-solid fa-list-check"></i> Cybersecurity Rule Assessment</h3>
+                <ul class="rule-list" id="rule-list"></ul>
+            </div>
+        </section>
+        <section class="history-section card" style="margin-top: 2rem;">
+            <h3><i class="fa-solid fa-history"></i> Recent Verifications</h3>
+            <table class="history-table" style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                <thead>
+                    <tr style="background:#f1f5f9; text-align:left;">
+                        <th style="padding:10px;">Company</th><th style="padding:10px;">Role</th><th style="padding:10px;">Score</th>
+                    </tr>
+                </thead>
+                <tbody id="history-rows"></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="{{ url_with_timestamp('static', filename='js/app.js') }}"></script>
+</body>
+</html>
